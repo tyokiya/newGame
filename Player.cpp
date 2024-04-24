@@ -6,7 +6,7 @@ Player::Player()
 	//3Dモデルの読み込み
 	modelHandle = MV1LoadModel("Model/Model.mv1");
 	//3Dモデルの圧縮
-	MV1SetScale(modelHandle, VGet(0.4f, 0.4f, 0.4f));
+	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	//座標のセット
 	pos = VGet(0.0f, 0.0f, 0.0f);
 	//プレイヤーの回転値をセット(0度)
@@ -30,6 +30,11 @@ void Player::Updata()
 	MV1SetPosition(modelHandle, pos);
 
 	// キーの入力に応じて移動処理
+	if (CheckHitKey(KEY_INPUT_SPACE)) // ジャンプ処理
+	{
+
+	}
+	
 }
 
 void Player::Draw()
