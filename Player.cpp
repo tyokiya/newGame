@@ -9,8 +9,9 @@ Player::Player()
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	//座標のセット
 	pos = VGet(0.0f, 0.0f, 0.0f);
+	vergePos = pos;
 	//プレイヤーの回転値をセット(0度)
-	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 0.0f, 0.0f));
+	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
 }
 
 Player::~Player()
@@ -24,6 +25,9 @@ Player::~Player()
 /// </summary>
 void Player::Updata()
 {
+	// 1フレ前の座標更新
+	vergePos = pos;
+
 	// キーの入力に応じて移動処理
 	if (CheckHitKey(KEY_INPUT_SPACE) && !isJump) // ジャンプ処理
 	{
@@ -45,7 +49,7 @@ void Player::Updata()
 			nowJumpForce = 0; //現在のジャン力を初期化
 		}
 	}
-
+	pos.x += 0.2f;
 	//プレイヤーの座標設定
 	MV1SetPosition(modelHandle, pos);
 }

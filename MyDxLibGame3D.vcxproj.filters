@@ -11,6 +11,9 @@
     <Filter Include="ソース ファイル\BackGround">
       <UniqueIdentifier>{8f925835-a2bc-4d45-ab0d-604b707f1c39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{d21dc916-d1a5-421c-914d-186fad97debd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -25,6 +28,9 @@
     <ClCompile Include="BackGroundManager.cpp">
       <Filter>ソース ファイル\BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -35,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="BackGroundManager.h">
       <Filter>ソース ファイル\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

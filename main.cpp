@@ -1,6 +1,7 @@
 ﻿#include "DxLib.h"
 #include "player.h"
 #include "BackGroundManager.h"
+#include "CameraController.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -24,17 +25,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	int fps = 0;			//フレームカウント
 
-	//奥行0.1～1000までをカメラの描画範囲とする
-	SetCameraNearFar(0.1f, 1000.0f);
-	//(90, 50, 20)の視点から(0, 45, 40)のターゲットを見る角度にカメラを設置
-	SetCameraPositionAndTarget_UpVecY(VGet(90, 50, 20), VGet(0, 45, 40));
-
 	//////////////////////////////////////////
 	/// クラス宣言
 	///////////////////////////////////////////
 
+	// カメラ
+	CameraController* camera = new CameraController();
 	// プレヤー
-	Player* player = new Player();
+	Player* player = new Player;
 	// 背景管理
 	BackGroundManager* backGroundManager = new BackGroundManager();
 
@@ -58,8 +56,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// 更新処理呼び出し
 		////////////////////////////////////
 		
+		// カメラ
+		camera->Update(player);
 		// プレイヤー
 		player->Updata();
+		
+
 
 		/////////////////////////////////////
 		// 描画処理呼び出し

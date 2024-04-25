@@ -13,9 +13,12 @@ public:
 	~Player();                          // デストラクタ
 	void Updata();                      // 更新処理
 	void Draw();						// 描画
+	VECTOR GetVergePos() const { return vergePos; };
+	VECTOR GetPos() const { return pos; };
 private:
 	int	modelHandle;					// モデルハンドル
 	VECTOR pos;							// プレイヤーの座標
+	VECTOR vergePos;                    // 1フレ前の座標
 	bool isJump = false;                // ジャンプフラグ
 	float nowJumpForce;                 // 現在のジャンプ力
 };
