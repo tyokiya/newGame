@@ -16,6 +16,7 @@ Player::Player()
 Player::~Player()
 {
 	// 3Dモデルの開放
+	MV1DeleteModel(modelHandle);
 }
 
 /// <summary>
@@ -23,18 +24,30 @@ Player::~Player()
 /// </summary>
 void Player::Updata()
 {
-	//復活フラグ
-	//ply->displayFlg = true;
+	// キーの入力に応じて移動処理
+	if (CheckHitKey(KEY_INPUT_SPACE) && !isJump) // ジャンプ処理
+	{
+		isJump = true;               // フラグを立てる
+		nowJumpForce = AddJumpForce; // 現在のジャン力を更新
+	}
+
+	// ジャンプ中の処理
+	if (isJump)
+	{
+		pos.y += nowJumpForce;   // 座標の更新
+		nowJumpForce -= Gravity; // 現在のジャンプ力を更新
+		
+		// プレイヤーが地面に埋まってないか確認
+		if (pos.y < 0)
+		{
+			pos.y = 0;	      // 座標設定
+			isJump = false;	  // フラグを下す
+			nowJumpForce = 0; //現在のジャン力を初期化
+		}
+	}
 
 	//プレイヤーの座標設定
 	MV1SetPosition(modelHandle, pos);
-
-	// キーの入力に応じて移動処理
-	if (CheckHitKey(KEY_INPUT_SPACE)) // ジャンプ処理
-	{
-
-	}
-	
 }
 
 void Player::Draw()
