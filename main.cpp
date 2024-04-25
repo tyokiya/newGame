@@ -1,9 +1,7 @@
 ﻿#include "DxLib.h"
 #include "player.h"
+#include "BackGroundManager.h"
 
-//-----------------------------------------------------------------------------
-// @brief  メイン関数.
-//-----------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	// 画面モードのセット
@@ -36,7 +34,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	///////////////////////////////////////////
 
 	// プレヤー
-	Player* player = new Player;
+	Player* player = new Player();
+	// 背景管理
+	BackGroundManager* backGroundManager = new BackGroundManager();
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -54,10 +54,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// 画面を初期化する
 		ClearDrawScreen();
 
+		/////////////////////////////////////
 		// 更新処理呼び出し
+		////////////////////////////////////
+		
+		// プレイヤー
 		player->Updata();
 
+		/////////////////////////////////////
 		// 描画処理呼び出し
+		////////////////////////////////////
+		
+		// プレイヤー
 		player->Draw();
 
 		// 裏画面の内容を表画面に反映させる
