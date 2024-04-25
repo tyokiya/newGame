@@ -18,5 +18,6 @@ public:
 	void Update();                             // 更新処理
 	void Draw();                               // 描画処理
 private:
-	vector<BackGroundObj> BackGoundObjects; // 背景オブジェクトのコンテナ
+	vector<BackGroundObj*> backGoundObjects; // 背景オブジェクトのコンテナ
+	int BackImgHandle;                       // 背景画像のハンドル
 };

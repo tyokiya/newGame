@@ -8,7 +8,7 @@ Player::Player()
 	//3Dモデルの圧縮
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	//座標のセット
-	pos = VGet(0.0f, 0.0f, 0.0f);
+	pos = VGet(-30.0f, 0.0f, 0.0f);
 	vergePos = pos;
 	//プレイヤーの回転値をセット(0度)
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
@@ -49,7 +49,9 @@ void Player::Updata()
 			nowJumpForce = 0; //現在のジャン力を初期化
 		}
 	}
-	pos.x += 0.2f;
+	// 走り中の処理
+	pos.x += RunSpeed;
+
 	//プレイヤーの座標設定
 	MV1SetPosition(modelHandle, pos);
 }

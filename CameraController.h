@@ -14,6 +14,7 @@ public:
 	CameraController();
 	~CameraController();
 	void Update(const Player* player);
+	VECTOR GetPos() const { return pos; };
 private:
 	VECTOR lookAtPos; // íçéãì_
 	VECTOR pos;       // ç¿ïW

@@ -56,17 +56,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// 更新処理呼び出し
 		////////////////////////////////////
 		
+		// 4秒に一度背景オブジェクトの追加
+		if (fps % 240 == 0)
+		{
+			backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+		}
+
 		// カメラ
 		camera->Update(player);
 		// プレイヤー
 		player->Updata();
-		
-
+	    // 背景管理者
+		backGroundManager->Update();
 
 		/////////////////////////////////////
 		// 描画処理呼び出し
 		////////////////////////////////////
-		
+				
+		// 背景管理者
+		backGroundManager->Draw();
 		// プレイヤー
 		player->Draw();
 
