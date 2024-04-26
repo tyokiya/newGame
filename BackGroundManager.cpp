@@ -24,7 +24,7 @@ void BackGroundManager::CreateBackGroudObj(float cameraPosX)
     case 0:
     {
         // クラス宣言
-        BackGroundObj* backGround = new BackGroundObj("Model/BackGround/House.mv1", 0.1f);
+        BackGroundObj* backGround = new BackGroundObj("Model/BackGround/House.mv1", HouseSizeScale);
         // 座標設定
         backGround->SetPos(cameraPosX);
         // オブジェクトをコンテナに追加
@@ -33,7 +33,7 @@ void BackGroundManager::CreateBackGroudObj(float cameraPosX)
     }        
     case 1:
     {
-        BackGroundObj* backGround = new BackGroundObj("Model/BackGround/House2.mv1", 0.05f);
+        BackGroundObj* backGround = new BackGroundObj("Model/BackGround/House2.mv1", House2SizeScale);
         backGround->SetPos(cameraPosX);
         backGoundObjects.push_back(backGround);
         break;
@@ -43,12 +43,18 @@ void BackGroundManager::CreateBackGroudObj(float cameraPosX)
     }
 }
 
-void BackGroundManager::Update()
+void BackGroundManager::Update(float cameraPosX)
 {
     // コンテナ内のオブジェクトの更新処理呼び出し
     for (int i = 0; i < backGoundObjects.size(); i++)
     {
-        backGoundObjects[i]->Update();
+        bool destroyFlg = backGoundObjects[i]->Update(cameraPosX);
+        // オブジェクトの削除フラグが帰ってきたらメモリ解放
+        if (destroyFlg)
+        {
+            delete(backGoundObjects[i]);
+            backGoundObjects.erase(backGoundObjects.begin());
+        }        
     }
 }
 

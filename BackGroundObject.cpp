@@ -11,7 +11,7 @@ BackGroundObj::BackGroundObj(const char* modelPass, float compressionValue)
     // モデルの圧縮
     MV1SetScale(modelHandle, VGet(compressionValue, compressionValue, compressionValue));
     // 初期座標のセット
-    pos = VGet(0.0f, 0.0f, 80.0f);
+    pos = BackGroundObjInitializePos;
 }
 
 BackGroundObj::~BackGroundObj()
@@ -31,7 +31,18 @@ void BackGroundObj::Draw()
     MV1DrawModel(modelHandle);
 }
 
-void BackGroundObj::Update()
+/// <summary>
+/// 更新処理
+/// </summary>
+/// <param name="cameraPosX"></param>
+/// <returns>オブジェクトの削除フラグ</returns>
+bool BackGroundObj::Update(float cameraPosX)
 {
-
+    // カメラから一定値以上離れたら削除処理
+    if (cameraPosX - CameraDirectionX > pos.x )
+    {
+        // オブジェクトの削除フラグを返す
+        return true;
+    }
+    return false;
 }
