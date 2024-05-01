@@ -5,18 +5,54 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{f401da5b-897b-44f2-a0cc-b1b0c65689eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BackGround">
+      <UniqueIdentifier>{8f925835-a2bc-4d45-ab0d-604b707f1c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{d21dc916-d1a5-421c-914d-186fad97debd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collider">
+      <UniqueIdentifier>{99cac490-323f-4ce9-8c81-200f73e52590}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundObject.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundManager.cpp">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>ソース ファイル\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundObject.h">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundManager.h">
+      <Filter>ソース ファイル\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ソース ファイル\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
