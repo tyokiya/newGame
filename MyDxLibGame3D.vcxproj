@@ -163,6 +163,7 @@
     <ClCompile Include="BackGroundManager.cpp" />
     <ClCompile Include="BackGroundObject.cpp" />
     <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="BackGroundManager.h" />
     <ClInclude Include="BackGroundObject.h" />
     <ClInclude Include="CameraController.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

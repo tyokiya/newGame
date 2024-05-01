@@ -3,15 +3,17 @@
 
 Player::Player()
 {
-	//3Dモデルの読み込み
+	// 3Dモデルの読み込み
 	modelHandle = MV1LoadModel("Model/Model.mv1");
-	//3Dモデルの圧縮
+	// 3Dモデルの圧縮
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
-	//座標のセット
+	// 座標のセット
 	pos = VGet(-30.0f, 0.0f, 0.0f);
 	vergePos = pos;
-	//プレイヤーの回転値をセット(0度)
+	// プレイヤーの回転値をセット(0度)
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
+	// 判定クラス初期化
+	collider = new Collider(ColliderRadius, VAdd(pos,CorrectionColliderPos)); // プレイヤーの座標が中心でなく足元にあるため修正値を足す
 }
 
 Player::~Player()
@@ -52,12 +54,16 @@ void Player::Updata()
 	// 走り中の処理
 	pos.x += RunSpeed;
 
-	//プレイヤーの座標設定
+	// プレイヤーの座標設定
 	MV1SetPosition(modelHandle, pos);
+	// 当たり判定の座標更新
+	collider->UpdatePos(VAdd(pos, CorrectionColliderPos)); // プレイヤーの座標が中心でなく足元にあるため修正値を足す
 }
 
 void Player::Draw()
 {
 	// プレイヤーの描画
 	MV1DrawModel(modelHandle);
+	// テスト用判定描画
+	collider->DrawCollider();
 }

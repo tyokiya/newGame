@@ -14,6 +14,9 @@
     <Filter Include="ソース ファイル\Camera">
       <UniqueIdentifier>{d21dc916-d1a5-421c-914d-186fad97debd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Collider">
+      <UniqueIdentifier>{99cac490-323f-4ce9-8c81-200f73e52590}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,6 +34,9 @@
     <ClCompile Include="CameraController.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>ソース ファイル\Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -44,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="CameraController.h">
       <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ソース ファイル\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
