@@ -6,6 +6,8 @@
 class Obstacle;
 using namespace std;
 
+
+
 /// <summary>
 /// 障害物管理クラス
 /// </summary>
@@ -14,7 +16,10 @@ class ObstacleManager
 public:
 	ObstacleManager();
 	~ObstacleManager();
+	void CreateObstacleObject(float cameraPosX); // 障害物オブジェクト生成
+	void Update(float cameraPosX);
+	void Draw();
 private:
-	vector<Obstacle*> obstacleObjects; // 障害物オブジェクトのコンテナ
+	vector<Obstacle*> obstacleObjects; // 障害物オブジェクトのコンテナ	
 };
 

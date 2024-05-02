@@ -9,7 +9,7 @@ Player::Player()
 	// 座標のセット
 	pos = VGet(-30.0f, 0.0f, 0.0f);
 	vergePos = pos;
-	// プレイヤーの回転値をセット(0度)
+	// 回転値をセット
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
 	// 判定クラス初期化
 	collider = new Collider(ColliderRadius, VAdd(pos,CorrectionColliderPos)); // プレイヤーの座標が中心でなく足元にあるため修正値を足す
@@ -64,5 +64,5 @@ void Player::Draw()
 	// プレイヤーの描画
 	MV1DrawModel(modelHandle);
 	// テスト用判定描画
-	//collider->DrawCollider();
+	collider->DrawCollider();
 }
