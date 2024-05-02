@@ -17,6 +17,9 @@
     <Filter Include="ソース ファイル\Collider">
       <UniqueIdentifier>{99cac490-323f-4ce9-8c81-200f73e52590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Obstacle">
+      <UniqueIdentifier>{43ede16b-0ffb-4718-bcf0-df1438a5a088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -37,6 +40,12 @@
     <ClCompile Include="Collider.cpp">
       <Filter>ソース ファイル\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>ソース ファイル\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleManager.cpp">
+      <Filter>ソース ファイル\Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -53,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>ソース ファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>ソース ファイル\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleManager.h">
+      <Filter>ソース ファイル\Obstacle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

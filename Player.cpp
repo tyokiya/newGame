@@ -1,10 +1,9 @@
-﻿#include"DxLib.h"
-#include"player.h"
+﻿#include"player.h"
 
 Player::Player()
 {
 	// 3Dモデルの読み込み
-	modelHandle = MV1LoadModel("Model/Model.mv1");
+	modelHandle = MV1LoadModel("Model/Player/Player.mv1");
 	// 3Dモデルの圧縮
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	// 座標のセット
@@ -65,5 +64,5 @@ void Player::Draw()
 	// プレイヤーの描画
 	MV1DrawModel(modelHandle);
 	// テスト用判定描画
-	collider->DrawCollider();
+	//collider->DrawCollider();
 }
