@@ -164,6 +164,7 @@
     <ClCompile Include="BackGroundObject.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Judge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="BackGroundObject.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Judge.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleManager.h" />
     <ClInclude Include="Player.h" />

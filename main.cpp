@@ -3,6 +3,7 @@
 #include "BackGroundManager.h"
 #include "CameraController.h"
 #include "ObstacleManager.h"
+#include "Judge.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -38,6 +39,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	BackGroundManager* backGroundManager = new BackGroundManager();
 	// 障害物管理
 	ObstacleManager* obstacleManager = new ObstacleManager();
+	// 判定
+	Judge* judge = new Judge();
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -79,6 +82,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		backGroundManager->Update(camera->GetPos().x);
 		// 障害物管理者
 		obstacleManager->Update(camera->GetPos().x);
+		// 衝突判定
+		judge->JudgeCollision(player, obstacleManager);
 
 		/////////////////////////////////////
 		// 描画処理呼び出し
@@ -89,7 +94,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// プレイヤー
 		player->Draw();
 		// 障害物管理者
-		obstacleManager->Draw();
+		obstacleManager->Draw();		
 
 		// 裏画面の内容を表画面に反映させる
 		ScreenFlip();

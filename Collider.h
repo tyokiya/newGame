@@ -14,6 +14,8 @@ public:
 	float  GetColliderRasius()const { return colliderRadius; }; // 半径ゲッター
 	bool GetisHit()const { return isHit; };                     // 衝突フラグゲッター
 	void DrawCollider();                                        // 判定の描画(テスト用)
+	VECTOR GetPos() const { return centerPos; };                // 座標のゲッター
+	float GetRadius() const { return colliderRadius; };
 private:
 	VECTOR centerPos;     // 当たり判定球の中心座標
 	float colliderRadius; // 当たり判定球の半径

@@ -35,8 +35,7 @@ void ObstacleManager::Update(float cameraPosX)
         // オブジェクトの削除フラグが帰ってきたらメモリ解放
         if (destroyFlg)
         {
-            delete(obstacleObjects[i]);
-            obstacleObjects.erase(obstacleObjects.begin());
+            DeleteObstacleObject(i);
         }
     }
 }
@@ -48,4 +47,14 @@ void ObstacleManager::Draw()
     {
         obstacleObjects[i]->Draw();
     }
+}
+
+/// <summary>
+/// 指定した障害物オブジェクトの削除
+/// </summary>
+/// <param name="index">削除するオブジェクトの要素数</param>
+void ObstacleManager::DeleteObstacleObject(int index)
+{
+    delete(obstacleObjects[index]);
+    obstacleObjects.erase(obstacleObjects.begin());
 }

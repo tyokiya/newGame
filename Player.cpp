@@ -11,6 +11,8 @@ Player::Player()
 	vergePos = pos;
 	// 回転値をセット
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
+	// ライフ初期化
+	life = InitializeLifeNum;
 	// 判定クラス初期化
 	collider = new Collider(ColliderRadius, VAdd(pos,CorrectionColliderPos)); // プレイヤーの座標が中心でなく足元にあるため修正値を足す
 }
@@ -65,4 +67,9 @@ void Player::Draw()
 	MV1DrawModel(modelHandle);
 	// テスト用判定描画
 	collider->DrawCollider();
+}
+
+void Player::Damage()
+{
+	life--; // 残機減少
 }
