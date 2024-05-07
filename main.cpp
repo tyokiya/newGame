@@ -5,6 +5,7 @@
 #include "ObstacleManager.h"
 #include "Judge.h"
 #include "Scene.h"
+#include "UImanager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -44,11 +45,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ObstacleManager* obstacleManager = new ObstacleManager();
 	// 判定
 	Judge* judge = new Judge();
+	// UI管理
+	UIManager* uiManager = new UIManager();
 
 	//////////////////////////////////////
 	/// 初期化処理
 	/////////////////////////////////////
-
 
 	// エスケープキーが押されるかウインドウが閉じられるまでループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -67,6 +69,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		case Tittle: // タイトルシーン
 
 			// タイトル画面兼チュートリアル画面の表示
+			
+			/////////////////////////////////////
+			// 更新処理呼び出し
+			////////////////////////////////////
 			// 7秒に一度背景オブジェクトの追加
 			if (fps % 420 == 0)
 			{
@@ -80,6 +86,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			backGroundManager->Update(camera->GetPos().x);
 			// 障害物管理者
 			obstacleManager->Update(camera->GetPos().x);
+			
+			/////////////////////////////////////
+			// 描画処理呼び出し
+			////////////////////////////////////
+
+			// 背景管理者
+			backGroundManager->Draw();
+			// プレイヤー
+			player->Draw();
+			// 障害物管理者
+			obstacleManager->Draw();
+			// UI管理
+			uiManager->DrawTittleSece();
 
 			// S入力でゲームシーンへ
 			if (CheckHitKey(KEY_INPUT_S))
