@@ -9,7 +9,9 @@ const float RunSpeed = 2.0f;          // 走る速度
 const float ColliderRadius = 8.0f;   // 当たり判定半径
 const VECTOR CorrectionColliderPos = VGet(0,17,0); // 中心座標を出す際の修正値
 
-//プレイヤークラス
+/// <summary>
+/// プレイヤークラス
+/// </summary>
 class Player
 {
 public:

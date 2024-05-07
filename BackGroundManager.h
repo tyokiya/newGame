@@ -7,7 +7,7 @@ class BackGroundObject;
 using namespace std;
 
 const float HouseSizeScale = 0.2f;   // 家オブジェクトの圧縮値
-const float House2SizeScale = 0.1f;   // 家オブジェクト2の圧縮値
+const float House2SizeScale = 0.1f; // 家オブジェクト2の圧縮値
 
 /// <summary>
 /// 背景管理クラス

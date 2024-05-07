@@ -1,16 +1,15 @@
-﻿#include"DxLib.h"
-#include"player.h"
+﻿#include"player.h"
 
 Player::Player()
 {
 	// 3Dモデルの読み込み
-	modelHandle = MV1LoadModel("Model/Model.mv1");
+	modelHandle = MV1LoadModel("Model/Player/Player.mv1");
 	// 3Dモデルの圧縮
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	// 座標のセット
 	pos = VGet(-30.0f, 0.0f, 0.0f);
 	vergePos = pos;
-	// プレイヤーの回転値をセット(0度)
+	// 回転値をセット
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));
 	// 判定クラス初期化
 	collider = new Collider(ColliderRadius, VAdd(pos,CorrectionColliderPos)); // プレイヤーの座標が中心でなく足元にあるため修正値を足す

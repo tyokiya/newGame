@@ -60,6 +60,7 @@ void BackGroundManager::Update(float cameraPosX)
 
 void BackGroundManager::Draw()
 {
+    // 背景描画
     DrawExtendGraph(0, 0, 1200, 800, BackImgHandle, true);
     // コンテナ内のオブジェクトの描画処理呼び出し
     for (int i = 0; i < backGoundObjects.size(); i++)

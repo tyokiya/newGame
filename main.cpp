@@ -2,6 +2,7 @@
 #include "player.h"
 #include "BackGroundManager.h"
 #include "CameraController.h"
+#include "ObstacleManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -35,6 +36,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Player* player = new Player;
 	// 背景管理
 	BackGroundManager* backGroundManager = new BackGroundManager();
+	// 障害物管理
+	ObstacleManager* obstacleManager = new ObstacleManager();
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -62,12 +65,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 		}
 
+		// 5秒に一度障害物追加
+		if (fps % 300 == 0)
+		{
+			obstacleManager->CreateObstacleObject(camera->GetPos().x);
+		}
+
 		// カメラ
 		camera->Update(player);
 		// プレイヤー
 		player->Updata();
 	    // 背景管理者
 		backGroundManager->Update(camera->GetPos().x);
+		// 障害物管理者
+		obstacleManager->Update(camera->GetPos().x);
 
 		/////////////////////////////////////
 		// 描画処理呼び出し
@@ -77,6 +88,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		backGroundManager->Draw();
 		// プレイヤー
 		player->Draw();
+		// 障害物管理者
+		obstacleManager->Draw();
 
 		// 裏画面の内容を表画面に反映させる
 		ScreenFlip();
