@@ -4,6 +4,7 @@
 #include "CameraController.h"
 #include "ObstacleManager.h"
 #include "Judge.h"
+#include "Scene.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -33,6 +34,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	// カメラ
 	CameraController* camera = new CameraController();
+	// シーンコントロール
+	Scene* sceneController = new Scene();
 	// プレヤー
 	Player* player = new Player;
 	// 背景管理
@@ -58,43 +61,79 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// 画面を初期化する
 		ClearDrawScreen();
 
-		/////////////////////////////////////
-		// 更新処理呼び出し
-		////////////////////////////////////
-		
-		// 7秒に一度背景オブジェクトの追加
-		if (fps % 420 == 0)
+		// シーンに合わせた処理
+		switch (sceneController->GetNowScene())
 		{
-			backGroundManager->CreateBackGroudObj(camera->GetPos().x);
-		}
+		case Tittle: // タイトルシーン
 
-		// 5秒に一度障害物追加
-		if (fps % 300 == 0)
-		{
-			obstacleManager->CreateObstacleObject(camera->GetPos().x);
-		}
+			// タイトル画面兼チュートリアル画面の表示
+			// 7秒に一度背景オブジェクトの追加
+			if (fps % 420 == 0)
+			{
+				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+			}
+			// カメラ
+			camera->Update(player);
+			// プレイヤー
+			player->Updata();
+			// 背景管理者
+			backGroundManager->Update(camera->GetPos().x);
+			// 障害物管理者
+			obstacleManager->Update(camera->GetPos().x);
 
-		// カメラ
-		camera->Update(player);
-		// プレイヤー
-		player->Updata();
-	    // 背景管理者
-		backGroundManager->Update(camera->GetPos().x);
-		// 障害物管理者
-		obstacleManager->Update(camera->GetPos().x);
-		// 衝突判定
-		judge->JudgeCollision(player, obstacleManager);
+			// S入力でゲームシーンへ
+			if (CheckHitKey(KEY_INPUT_S))
+			{
+				sceneController->ChangeNextScene();
+			}
 
-		/////////////////////////////////////
-		// 描画処理呼び出し
-		////////////////////////////////////
-				
-		// 背景管理者
-		backGroundManager->Draw();
-		// プレイヤー
-		player->Draw();
-		// 障害物管理者
-		obstacleManager->Draw();		
+			break;
+		case Game: // ゲームシーン
+			/////////////////////////////////////
+			// 更新処理呼び出し
+			////////////////////////////////////
+
+			// 7秒に一度背景オブジェクトの追加
+			if (fps % 420 == 0)
+			{
+				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+			}
+
+			// 5秒に一度障害物追加
+			if (fps % 300 == 0)
+			{
+				obstacleManager->CreateObstacleObject(camera->GetPos().x);
+			}
+
+			// カメラ
+			camera->Update(player);
+			// プレイヤー
+			player->Updata();
+			// 背景管理者
+			backGroundManager->Update(camera->GetPos().x);
+			// 障害物管理者
+			obstacleManager->Update(camera->GetPos().x);
+			// 衝突判定
+			judge->JudgeCollision(player, obstacleManager);
+
+			/////////////////////////////////////
+			// 描画処理呼び出し
+			////////////////////////////////////
+
+			// 背景管理者
+			backGroundManager->Draw();
+			// プレイヤー
+			player->Draw();
+			// 障害物管理者
+			obstacleManager->Draw();
+
+			break;
+		case Result: // リザルトシーン
+
+			break;
+		default:
+			break;
+		}				
 
 		// 裏画面の内容を表画面に反映させる
 		ScreenFlip();
@@ -114,7 +153,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			fps = 0;
 		}
 	}
-
 
 	// ＤＸライブラリの後始末
 	DxLib_End();
