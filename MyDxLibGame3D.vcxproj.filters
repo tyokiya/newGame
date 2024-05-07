@@ -20,6 +20,9 @@
     <Filter Include="ソース ファイル\Obstacle">
       <UniqueIdentifier>{43ede16b-0ffb-4718-bcf0-df1438a5a088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Judge">
+      <UniqueIdentifier>{eadf5b5e-942d-4939-9bc6-ff5325aca10b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -46,6 +49,9 @@
     <ClCompile Include="ObstacleManager.cpp">
       <Filter>ソース ファイル\Obstacle</Filter>
     </ClCompile>
+    <ClCompile Include="Judge.cpp">
+      <Filter>ソース ファイル\Judge</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -68,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="ObstacleManager.h">
       <Filter>ソース ファイル\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Judge.h">
+      <Filter>ソース ファイル\Judge</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
