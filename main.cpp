@@ -27,7 +27,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	float fixedDeltaTime = 1.0f / 60.0f;               // 60分の1秒 = 0.01666...秒
 	float waitFrameTime = 15500;                       // 16000マイクロ秒 = 16ミリ秒 = 0.016秒
 
-	int fps = 0;			//フレームカウント
+	int fps = 0;			   // フレームカウント
+	bool gameStartFlg = false; // ゲーム開始フラグ
 
 	//////////////////////////////////////////
 	/// クラス宣言
@@ -73,8 +74,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			/////////////////////////////////////
 			// 更新処理呼び出し
 			////////////////////////////////////
-			// 7秒に一度背景オブジェクトの追加
-			if (fps % 420 == 0)
+			// 4秒に一度背景オブジェクトの追加
+			if (fps % 240 == 0)
 			{
 				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 			}
@@ -103,23 +104,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// S入力でゲームシーンへ
 			if (CheckHitKey(KEY_INPUT_S))
 			{
-				sceneController->ChangeNextScene();
+				sceneController->ChangeNextScene(); // シーン切り替え
+				fps = 0;							// フレーム初期化
 			}
 
 			break;
-		case Game: // ゲームシーン
+		case Game: // ゲームシーン			
 			/////////////////////////////////////
 			// 更新処理呼び出し
 			////////////////////////////////////
 
-			// 7秒に一度背景オブジェクトの追加
-			if (fps % 420 == 0)
+			// 4秒に一度背景オブジェクトの追加
+			if (fps % 240 == 0)
 			{
 				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 			}
 
-			// 5秒に一度障害物追加
-			if (fps % 300 == 0)
+			// スタートフラグがたち5秒に一回障害物追加
+			if (fps % 300 == 0 && gameStartFlg)
 			{
 				obstacleManager->CreateObstacleObject(camera->GetPos().x);
 			}
@@ -138,13 +140,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			/////////////////////////////////////
 			// 描画処理呼び出し
 			////////////////////////////////////
-
+						
 			// 背景管理者
 			backGroundManager->Draw();
 			// プレイヤー
 			player->Draw();
 			// 障害物管理者
 			obstacleManager->Draw();
+			// ゲーム開始までのカウントダウン
+			if (!gameStartFlg)
+			{
+				gameStartFlg = uiManager->Draw3CountDown(fps); // カウント終了後trueが帰る
+			}
 
 			break;
 		case Result: // リザルトシーン

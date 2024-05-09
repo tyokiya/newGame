@@ -3,7 +3,8 @@
 BackGroundManager::BackGroundManager()
 {
     //”wŒi‰æ‘œ“Ç‚İ
-    BackImgHandle = LoadGraph("IMG/Gras.jpg");
+    GroudImgHandle = LoadGraph("IMG/Ground.jpg");
+    SkyImgHandle = LoadGraph("IMG/Sky.jpg");
 }
 
 BackGroundManager::~BackGroundManager()
@@ -60,8 +61,9 @@ void BackGroundManager::Update(float cameraPosX)
 
 void BackGroundManager::Draw()
 {
-    // ”wŒi•`‰æ
-    DrawExtendGraph(0, 0, 1200, 800, BackImgHandle, true);
+    // ”wŒi•`‰æ    
+    DrawExtendGraph(0, 0, 1200, 800, GroudImgHandle, true); // ’n–Ê
+    DrawExtendGraph(0, 0, 1200, 450, SkyImgHandle, true);   // ‹ó
     // ƒRƒ“ƒeƒi“à‚ÌƒIƒuƒWƒFƒNƒg‚Ì•`‰æˆ—ŒÄ‚Ño‚µ
     for (int i = 0; i < backGoundObjects.size(); i++)
     {
