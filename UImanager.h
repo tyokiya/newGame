@@ -12,8 +12,10 @@ class UIManager
 public:
     UIManager();
     ~UIManager();
-    void DrawTittleSece();  // タイトルシーン描画
-    bool Draw3CountDown(int fps); // 3秒カウント
+    void DrawTittleSece();                 // タイトルシーン描画
+    void DrawGameScene(bool isAvoidanceSuccess);                  // ゲームシーン描画
+    bool Draw3CountDown(int fps);          // 3秒カウント
 private:
     int nowCount = 3; // カウントダウン時に使う変数
+    
 };

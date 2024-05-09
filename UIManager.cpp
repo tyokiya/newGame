@@ -24,6 +24,19 @@ void UIManager::DrawTittleSece()
 }
 
 /// <summary>
+/// ゲームシーン描画
+/// </summary>
+/// <param name="isAvoidanceSuccess">回避成功フラグ</param>
+void UIManager::DrawGameScene(bool isAvoidanceSuccess)
+{
+    // 回避成功フラグが立っていれば成功アクション描画
+    if (isAvoidanceSuccess)
+    {
+        DrawFormatString(600, 400, GetColor(255, 0, 0), "成功");
+    }
+}
+
+/// <summary>
 /// 3秒カウント
 /// </summary>
 /// <param name="fps">カウントするためのフレームを渡す</param>
@@ -51,3 +64,4 @@ bool UIManager::Draw3CountDown(int fps)
         return false;
     }
 }
+

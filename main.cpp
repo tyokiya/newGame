@@ -6,6 +6,7 @@
 #include "Judge.h"
 #include "Scene.h"
 #include "UImanager.h"
+#include "Score.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -33,21 +34,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//////////////////////////////////////////
 	/// クラス宣言
 	///////////////////////////////////////////
-
-	// カメラ
-	CameraController* camera = new CameraController();
-	// シーンコントロール
-	Scene* sceneController = new Scene();
-	// プレヤー
-	Player* player = new Player;
-	// 背景管理
-	BackGroundManager* backGroundManager = new BackGroundManager();
-	// 障害物管理
-	ObstacleManager* obstacleManager = new ObstacleManager();
-	// 判定
-	Judge* judge = new Judge();
-	// UI管理
-	UIManager* uiManager = new UIManager();
+	
+	CameraController*  camera			 = new CameraController();  // カメラ	
+	Scene*             sceneController	 = new Scene();             // シーンコントロール	
+	Player*            player			 = new Player;				// プレヤー	
+	BackGroundManager* backGroundManager = new BackGroundManager(); // 背景管理	
+	ObstacleManager*  obstacleManager    = new ObstacleManager();   // 障害物管理	
+	Judge*            judge				 = new Judge();				// 判定	
+	UIManager*        uiManager			 = new UIManager();			// UI管理
+	Score*            scoreController	 = new Score();	            // 点数管理
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -135,7 +130,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// 障害物管理者
 			obstacleManager->Update(camera->GetPos().x);
 			// 衝突判定
-			judge->JudgeCollision(player, obstacleManager);
+			judge->Update(player, obstacleManager, scoreController, fps);
 
 			/////////////////////////////////////
 			// 描画処理呼び出し
@@ -147,6 +142,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			player->Draw();
 			// 障害物管理者
 			obstacleManager->Draw();
+			// UI
+			uiManager->DrawGameScene(judge->GetIsAvoidanceSuccess());
 			// ゲーム開始までのカウントダウン
 			if (!gameStartFlg)
 			{

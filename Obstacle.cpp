@@ -29,7 +29,7 @@ Obstacle::~Obstacle()
 bool Obstacle::Update(float cameraPosX)
 {
 	// カメラから一定値以上離れたら削除処理
-	if (cameraPosX - ObstacleCameraDirectionX > pos.x)
+	if (cameraPosX - ObstacleDeleteCameraDirectionX > pos.x)
 	{
 		// オブジェクトの削除フラグを返す
 		return true;
