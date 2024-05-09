@@ -7,7 +7,7 @@ Player::Player()
 	// 3Dモデルの圧縮
 	MV1SetScale(modelHandle, VGet(PlayerSizeScale, PlayerSizeScale, PlayerSizeScale));
 	// 座標のセット
-	pos = VGet(-30.0f, 0.0f, 0.0f);
+	pos = InitializePos;
 	vergePos = pos;
 	// 回転値をセット
 	MV1SetRotationXYZ(modelHandle, VGet(0.0f, 89.5f, 0.0f));

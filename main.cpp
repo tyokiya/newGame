@@ -4,6 +4,8 @@
 #include "CameraController.h"
 #include "ObstacleManager.h"
 #include "Judge.h"
+#include "Scene.h"
+#include "UImanager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -25,7 +27,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	float fixedDeltaTime = 1.0f / 60.0f;               // 60分の1秒 = 0.01666...秒
 	float waitFrameTime = 15500;                       // 16000マイクロ秒 = 16ミリ秒 = 0.016秒
 
-	int fps = 0;			//フレームカウント
+	int fps = 0;			   // フレームカウント
+	bool gameStartFlg = false; // ゲーム開始フラグ
 
 	//////////////////////////////////////////
 	/// クラス宣言
@@ -33,6 +36,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	// カメラ
 	CameraController* camera = new CameraController();
+	// シーンコントロール
+	Scene* sceneController = new Scene();
 	// プレヤー
 	Player* player = new Player;
 	// 背景管理
@@ -41,11 +46,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ObstacleManager* obstacleManager = new ObstacleManager();
 	// 判定
 	Judge* judge = new Judge();
+	// UI管理
+	UIManager* uiManager = new UIManager();
 
 	//////////////////////////////////////
 	/// 初期化処理
 	/////////////////////////////////////
-
 
 	// エスケープキーが押されるかウインドウが閉じられるまでループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -58,43 +64,102 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// 画面を初期化する
 		ClearDrawScreen();
 
-		/////////////////////////////////////
-		// 更新処理呼び出し
-		////////////////////////////////////
-		
-		// 7秒に一度背景オブジェクトの追加
-		if (fps % 420 == 0)
+		// シーンに合わせた処理
+		switch (sceneController->GetNowScene())
 		{
-			backGroundManager->CreateBackGroudObj(camera->GetPos().x);
-		}
+		case Tittle: // タイトルシーン
 
-		// 5秒に一度障害物追加
-		if (fps % 300 == 0)
-		{
-			obstacleManager->CreateObstacleObject(camera->GetPos().x);
-		}
+			// タイトル画面兼チュートリアル画面の表示
+			
+			/////////////////////////////////////
+			// 更新処理呼び出し
+			////////////////////////////////////
+			// 4秒に一度背景オブジェクトの追加
+			if (fps % 240 == 0)
+			{
+				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+			}
+			// カメラ
+			camera->Update(player);
+			// プレイヤー
+			player->Updata();
+			// 背景管理者
+			backGroundManager->Update(camera->GetPos().x);
+			// 障害物管理者
+			obstacleManager->Update(camera->GetPos().x);
+			
+			/////////////////////////////////////
+			// 描画処理呼び出し
+			////////////////////////////////////
 
-		// カメラ
-		camera->Update(player);
-		// プレイヤー
-		player->Updata();
-	    // 背景管理者
-		backGroundManager->Update(camera->GetPos().x);
-		// 障害物管理者
-		obstacleManager->Update(camera->GetPos().x);
-		// 衝突判定
-		judge->JudgeCollision(player, obstacleManager);
+			// 背景管理者
+			backGroundManager->Draw();
+			// プレイヤー
+			player->Draw();
+			// 障害物管理者
+			obstacleManager->Draw();
+			// UI管理
+			uiManager->DrawTittleSece();
 
-		/////////////////////////////////////
-		// 描画処理呼び出し
-		////////////////////////////////////
-				
-		// 背景管理者
-		backGroundManager->Draw();
-		// プレイヤー
-		player->Draw();
-		// 障害物管理者
-		obstacleManager->Draw();		
+			// S入力でゲームシーンへ
+			if (CheckHitKey(KEY_INPUT_S))
+			{
+				sceneController->ChangeNextScene(); // シーン切り替え
+				fps = 0;							// フレーム初期化
+			}
+
+			break;
+		case Game: // ゲームシーン			
+			/////////////////////////////////////
+			// 更新処理呼び出し
+			////////////////////////////////////
+
+			// 4秒に一度背景オブジェクトの追加
+			if (fps % 240 == 0)
+			{
+				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+			}
+
+			// スタートフラグがたち5秒に一回障害物追加
+			if (fps % 300 == 0 && gameStartFlg)
+			{
+				obstacleManager->CreateObstacleObject(camera->GetPos().x);
+			}
+
+			// カメラ
+			camera->Update(player);
+			// プレイヤー
+			player->Updata();
+			// 背景管理者
+			backGroundManager->Update(camera->GetPos().x);
+			// 障害物管理者
+			obstacleManager->Update(camera->GetPos().x);
+			// 衝突判定
+			judge->JudgeCollision(player, obstacleManager);
+
+			/////////////////////////////////////
+			// 描画処理呼び出し
+			////////////////////////////////////
+						
+			// 背景管理者
+			backGroundManager->Draw();
+			// プレイヤー
+			player->Draw();
+			// 障害物管理者
+			obstacleManager->Draw();
+			// ゲーム開始までのカウントダウン
+			if (!gameStartFlg)
+			{
+				gameStartFlg = uiManager->Draw3CountDown(fps); // カウント終了後trueが帰る
+			}
+
+			break;
+		case Result: // リザルトシーン
+
+			break;
+		default:
+			break;
+		}				
 
 		// 裏画面の内容を表画面に反映させる
 		ScreenFlip();
@@ -114,7 +179,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			fps = 0;
 		}
 	}
-
 
 	// ＤＸライブラリの後始末
 	DxLib_End();

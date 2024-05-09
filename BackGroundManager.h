@@ -22,5 +22,6 @@ public:
 	void Draw();                               // 描画処理
 private:
 	vector<BackGroundObj*> backGoundObjects; // 背景オブジェクトのコンテナ
-	int BackImgHandle;                       // 背景画像のハンドル
+	int GroudImgHandle;                      // 地面画像のハンドル
+	int SkyImgHandle;                        // 空画像のハンドル
 };

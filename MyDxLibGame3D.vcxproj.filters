@@ -23,6 +23,15 @@
     <Filter Include="ソース ファイル\Judge">
       <UniqueIdentifier>{eadf5b5e-942d-4939-9bc6-ff5325aca10b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{d9c1bee5-f34b-4dbb-8ab5-f305960a8bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{c3ed5b4e-b042-4715-b4e2-277320e69e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Score">
+      <UniqueIdentifier>{7b16bb05-f8e1-49a5-ad7e-47f24b64cac3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +61,15 @@
     <ClCompile Include="Judge.cpp">
       <Filter>ソース ファイル\Judge</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>ソース ファイル\Score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -77,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="Judge.h">
       <Filter>ソース ファイル\Judge</Filter>
+    </ClInclude>
+    <ClInclude Include="UImanager.h">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>ソース ファイル\Score</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
