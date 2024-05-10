@@ -1,4 +1,5 @@
 ﻿#include "DxLib.h"
+#include "FrameCounter.h"
 #include "player.h"
 #include "BackGroundManager.h"
 #include "CameraController.h"
@@ -6,6 +7,7 @@
 #include "Judge.h"
 #include "Scene.h"
 #include "UImanager.h"
+#include "Score.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -27,27 +29,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	float fixedDeltaTime = 1.0f / 60.0f;               // 60分の1秒 = 0.01666...秒
 	float waitFrameTime = 15500;                       // 16000マイクロ秒 = 16ミリ秒 = 0.016秒
 
-	int fps = 0;			   // フレームカウント
 	bool gameStartFlg = false; // ゲーム開始フラグ
 
 	//////////////////////////////////////////
 	/// クラス宣言
 	///////////////////////////////////////////
-
-	// カメラ
-	CameraController* camera = new CameraController();
-	// シーンコントロール
-	Scene* sceneController = new Scene();
-	// プレヤー
-	Player* player = new Player;
-	// 背景管理
-	BackGroundManager* backGroundManager = new BackGroundManager();
-	// 障害物管理
-	ObstacleManager* obstacleManager = new ObstacleManager();
-	// 判定
-	Judge* judge = new Judge();
-	// UI管理
-	UIManager* uiManager = new UIManager();
+	
+	FrameCounter*	   frameConter		 = new FrameCounter();      // フレームカウンター
+	CameraController*  camera			 = new CameraController();  // カメラ	
+	Scene*             sceneController	 = new Scene();             // シーンコントロール	
+	Player*            player			 = new Player;				// プレヤー	
+	BackGroundManager* backGroundManager = new BackGroundManager(); // 背景管理	
+	ObstacleManager*  obstacleManager    = new ObstacleManager();   // 障害物管理	
+	Judge*            judge				 = new Judge();				// 判定	
+	UIManager*        uiManager			 = new UIManager();			// UI管理
+	Score*            scoreController	 = new Score();	            // 点数管理
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -75,7 +71,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// 更新処理呼び出し
 			////////////////////////////////////
 			// 4秒に一度背景オブジェクトの追加
-			if (fps % 240 == 0)
+			if (frameConter->GetFrame() % 240 == 0)
 			{
 				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 			}
@@ -105,7 +101,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			if (CheckHitKey(KEY_INPUT_S))
 			{
 				sceneController->ChangeNextScene(); // シーン切り替え
-				fps = 0;							// フレーム初期化
+				frameConter->Initialize();			// フレーム初期化
 			}
 
 			break;
@@ -115,13 +111,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			////////////////////////////////////
 
 			// 4秒に一度背景オブジェクトの追加
-			if (fps % 240 == 0)
+			if (frameConter->GetFrame() % 240 == 0)
 			{
 				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 			}
 
 			// スタートフラグがたち5秒に一回障害物追加
-			if (fps % 300 == 0 && gameStartFlg)
+			if (frameConter->GetFrame() % 300 == 0 && gameStartFlg)
 			{
 				obstacleManager->CreateObstacleObject(camera->GetPos().x);
 			}
@@ -135,7 +131,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// 障害物管理者
 			obstacleManager->Update(camera->GetPos().x);
 			// 衝突判定
-			judge->JudgeCollision(player, obstacleManager);
+			judge->Update(player, obstacleManager, scoreController, frameConter->GetFrame());
 
 			/////////////////////////////////////
 			// 描画処理呼び出し
@@ -147,10 +143,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			player->Draw();
 			// 障害物管理者
 			obstacleManager->Draw();
+			// UI
+			uiManager->DrawGameScene(judge->GetIsAvoidanceSuccess(), scoreController->GetScore(),player->GetLifeNum());
 			// ゲーム開始までのカウントダウン
 			if (!gameStartFlg)
 			{
-				gameStartFlg = uiManager->Draw3CountDown(fps); // カウント終了後trueが帰る
+				gameStartFlg = uiManager->Draw3CountDown(frameConter->GetFrame()); // カウント終了後trueが帰る
+			}
+
+			// プレイヤーの残機0でリザルトへ
+			if (player->GetLifeNum() == 0)
+			{
+				sceneController->ChangeNextScene(); // シーン切り替え
+				frameConter->Initialize();			// フレーム初期化
 			}
 
 			break;
@@ -172,12 +177,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		prevCount = nowCount;
 		//フレームカウント増加
-		fps++;
-		//int型の最大値を超えないための処理
-		if (fps > 2000000000)
-		{
-			fps = 0;
-		}
+		frameConter->Update();
 	}
 
 	// ＤＸライブラリの後始末
