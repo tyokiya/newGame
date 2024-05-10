@@ -41,11 +41,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Scene*             sceneController	 = new Scene();             // シーンコントロール	
 	Player*            player			 = new Player;				// プレヤー	
 	BackGroundManager* backGroundManager = new BackGroundManager(); // 背景管理	
-	ObstacleManager*  obstacleManager    = new ObstacleManager();   // 障害物管理	
-	Judge*            judge				 = new Judge();				// 判定	
-	UIManager*        uiManager			 = new UIManager();			// UI管理
-	Score*            scoreController	 = new Score();	            // 点数管理
-	EffectController* effectController	 = new EffectController();  // エフェクトコントローラー
+	ObstacleManager*   obstacleManager   = new ObstacleManager();   // 障害物管理	
+	Judge*             judge			 = new Judge();			    // 判定	
+	UIManager*         uiManager		 = new UIManager();		    // UI管理
+	Score*             scoreController	 = new Score();	            // 点数管理
+	EffectController*  effectController	 = new EffectController();  // エフェクトコントローラー
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -91,7 +91,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			////////////////////////////////////
 
 			// 背景管理者
-			backGroundManager->Draw();
+			backGroundManager->DrawGameScene();
 			// プレイヤー
 			player->Draw();
 			// 障害物管理者
@@ -142,7 +142,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			////////////////////////////////////
 						
 			// 背景管理者
-			backGroundManager->Draw();
+			backGroundManager->DrawGameScene();
 			// プレイヤー
 			player->Draw();
 			// 障害物管理者
@@ -166,6 +166,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 			break;
 		case Result: // リザルトシーン
+			/////////////////////////////////////
+			// 描画処理呼び出し
+			////////////////////////////////////
+
+			// 背景管理者
+			backGroundManager->DrawResultScene();
+			// UI
+			uiManager->DrawResultScene(scoreController->GetScore());
 
 			break;
 		default:

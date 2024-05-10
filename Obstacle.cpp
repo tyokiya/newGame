@@ -44,5 +44,5 @@ void Obstacle::Draw()
 	// •`‰æ
 	MV1DrawModel(modelHandle);
 	// ƒeƒXƒg—p”»’è•`‰æ
-	collider->DrawCollider();
+	//collider->DrawCollider();
 }

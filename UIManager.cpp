@@ -47,6 +47,18 @@ void UIManager::DrawGameScene(bool isAvoidanceSuccess,int score, int playerLifeN
 }
 
 /// <summary>
+/// リザルトシーン描画
+/// </summary>
+/// <param name="score">点数</param>
+void UIManager::DrawResultScene(int score)
+{
+    // スコアの描画
+    SetFontSize(ResultFontSize);
+    DrawFormatString(350, 150, GetColor(0, 0, 0), "Score");
+    DrawFormatString(370, 350, GetColor(0, 0, 0), "%d", score);
+}
+
+/// <summary>
 /// 3秒カウント
 /// </summary>
 /// <param name="fps">カウントするためのフレームを渡す</param>
