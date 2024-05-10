@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "UImanager.h"
 #include "Score.h"
+#include "EffectController.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -44,6 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Judge*            judge				 = new Judge();				// 判定	
 	UIManager*        uiManager			 = new UIManager();			// UI管理
 	Score*            scoreController	 = new Score();	            // 点数管理
+	EffectController* effectController	 = new EffectController();  // エフェクトコントローラー
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -116,8 +118,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
 			}
 
-			// スタートフラグがたち5秒に一回障害物追加
-			if (frameConter->GetFrame() % 300 == 0 && gameStartFlg)
+			// スタートフラグがたち4秒に一回障害物追加
+			if (frameConter->GetFrame() % 240 == 0 && gameStartFlg)
 			{
 				obstacleManager->CreateObstacleObject(camera->GetPos().x);
 			}
@@ -131,7 +133,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// 障害物管理者
 			obstacleManager->Update(camera->GetPos().x);
 			// 衝突判定
-			judge->Update(player, obstacleManager, scoreController, frameConter->GetFrame());
+			judge->Update(player, obstacleManager, scoreController, effectController, frameConter->GetFrame());
+			// エフェクトコントローラー
+			effectController->Update(frameConter->GetFrame());
 
 			/////////////////////////////////////
 			// 描画処理呼び出し
@@ -145,6 +149,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			obstacleManager->Draw();
 			// UI
 			uiManager->DrawGameScene(judge->GetIsAvoidanceSuccess(), scoreController->GetScore(),player->GetLifeNum());
+			// エフェクト
+			effectController->Draw();
 			// ゲーム開始までのカウントダウン
 			if (!gameStartFlg)
 			{

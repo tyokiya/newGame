@@ -6,6 +6,7 @@
 #include "UImanager.h"
 #include "Score.h"
 #include "FrameCounter.h"
+#include "EffectController.h"
 #include "vector"
 
 using namespace std;
@@ -18,7 +19,7 @@ class Judge
 public:
 	Judge();
 	~Judge();
-	void Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCntroller, int fps); // 衝突判定
+	void Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCntroller, EffectController* effectContoroller, int fps); // 衝突判定
 	bool GetIsAvoidanceSuccess()const { return isAvoidanceSuccess; }; // 回避成功フラグを返す
 private:
 	bool isAvoidanceSuccess;	     // 回避成功フラグ
