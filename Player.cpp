@@ -66,7 +66,7 @@ void Player::Draw()
 	// プレイヤーの描画
 	MV1DrawModel(modelHandle);
 	// テスト用判定描画
-	collider->DrawCollider();
+	//collider->DrawCollider();
 }
 
 void Player::Damage()

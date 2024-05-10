@@ -3,7 +3,7 @@
 #include "Collider.h"
 
 const VECTOR InitializePos = VGet(-55, 0, 0);
-const int InitializeLifeNum = 3;	  // 初期ライフ数
+const int InitializeLifeNum = 2;	  // 初期ライフ数
 const float PlayerSizeScale = 0.2f;   // プレイヤーの圧縮値
 const float AddJumpForce = 3.0f;      // ジャンプ力
 const float Gravity = 0.1f;			  // 重力

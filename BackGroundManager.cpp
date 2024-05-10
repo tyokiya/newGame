@@ -59,7 +59,7 @@ void BackGroundManager::Update(float cameraPosX)
     }
 }
 
-void BackGroundManager::Draw()
+void BackGroundManager::DrawGameScene()
 {
     // ”wŒi•`‰æ    
     DrawExtendGraph(0, 0, 1200, 800, GroudImgHandle, true); // ’n–Ê
@@ -69,4 +69,11 @@ void BackGroundManager::Draw()
     {
         backGoundObjects[i]->Draw();
     }
+}
+
+void BackGroundManager::DrawResultScene()
+{
+    // ”wŒi•`‰æ    
+    DrawExtendGraph(0, 0, 1200, 800, GroudImgHandle, true); // ’n–Ê
+    DrawExtendGraph(0, 0, 1200, 450, SkyImgHandle, true);   // ‹ó
 }

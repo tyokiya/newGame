@@ -19,7 +19,8 @@ public:
 	~BackGroundManager();                      // デストラクタ
 	void CreateBackGroudObj(float cameraPosX); // 背景オブジェクト生成処理
 	void Update(float cameraPosX);             // 更新処理
-	void Draw();                               // 描画処理
+	void DrawGameScene();                      // 描画処理
+	void DrawResultScene();					   // リザルトシーン描画
 private:
 	vector<BackGroundObj*> backGoundObjects; // 背景オブジェクトのコンテナ
 	int GroudImgHandle;                      // 地面画像のハンドル
