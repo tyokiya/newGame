@@ -8,6 +8,9 @@ const int TurtrialFontSize = 50;
 const int CountDownFontSize = 120;
 const int SuccoreFontSize = 50;
 
+/// <summary>
+/// UIŠÇ—ƒNƒ‰ƒX
+/// </summary>
 class UIManager
 {
 public:

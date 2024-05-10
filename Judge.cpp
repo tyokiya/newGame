@@ -17,7 +17,7 @@ Judge::~Judge()
 /// <param name="ply">プレイヤークラス</param>
 /// <param name="obstacleObjects">障害物</param>
 /// <param name="scoreCntroller">スコア管理</param>
-void Judge::Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCntroller,int fps)
+void Judge::Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCntroller, EffectController* effectContoroller, int fps)
 {
 	// 回避成功時から0.5秒経過でフラグを下す
 	if (fps == avoidanceSuccessFrame + 30 && isAvoidanceSuccess)
@@ -38,8 +38,9 @@ void Judge::Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCn
 			< ply->GetColliderRadius() + obstacleObjects[i]->GetColliderRadius())
 		{
 			// 衝突処理
-			ply->Damage();						      // プレイヤーのダメージ処理
-			obstacleManager->DeleteObstacleObject(i); // 障害物オブジェクトの削除
+			ply->Damage();						           // プレイヤーのダメージ処理
+			obstacleManager->DeleteObstacleObject(i);      // 障害物オブジェクトの削除
+			effectContoroller->SetIsPlayDamageEffect(true); // ダメージエフェクトの再生フラグを立てる
 			return;
 		}
 	}

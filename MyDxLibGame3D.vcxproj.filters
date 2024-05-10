@@ -35,6 +35,9 @@
     <Filter Include="ソース ファイル\Frame">
       <UniqueIdentifier>{e2fa49e3-6d39-4ab2-a073-16850bd31a9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Effect">
+      <UniqueIdentifier>{8ab2dc21-4631-4b24-b26d-4f127b42cb97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,6 +79,9 @@
     <ClCompile Include="FrameCounter.cpp">
       <Filter>ソース ファイル\Frame</Filter>
     </ClCompile>
+    <ClCompile Include="EffectController.cpp">
+      <Filter>ソース ファイル\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -113,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="FrameCounter.h">
       <Filter>ソース ファイル\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectController.h">
+      <Filter>ソース ファイル\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
