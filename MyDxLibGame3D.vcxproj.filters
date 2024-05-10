@@ -32,6 +32,9 @@
     <Filter Include="ソース ファイル\Score">
       <UniqueIdentifier>{7b16bb05-f8e1-49a5-ad7e-47f24b64cac3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Frame">
+      <UniqueIdentifier>{e2fa49e3-6d39-4ab2-a073-16850bd31a9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,6 +73,9 @@
     <ClCompile Include="Score.cpp">
       <Filter>ソース ファイル\Score</Filter>
     </ClCompile>
+    <ClCompile Include="FrameCounter.cpp">
+      <Filter>ソース ファイル\Frame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -104,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>ソース ファイル\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameCounter.h">
+      <Filter>ソース ファイル\Frame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

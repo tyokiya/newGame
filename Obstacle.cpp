@@ -14,6 +14,8 @@ Obstacle::Obstacle(float cameraPosX)
 	MV1SetPosition(modelHandle, pos);	
 	// 判定クラス初期化
 	collider = new Collider(ObstacleColliderRadius, VAdd(pos,ObstacleCorrectionColliderPos)); // 障害物の座標が中心でなく足元にあるため修正値を足す
+	// フラグ初期化
+	isPassing = false;
 }
 
 Obstacle::~Obstacle()

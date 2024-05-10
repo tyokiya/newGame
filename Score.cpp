@@ -3,7 +3,7 @@
 
 Score::Score()
 {
-
+    nowScore = 0;
 }
 Score::~Score()
 {

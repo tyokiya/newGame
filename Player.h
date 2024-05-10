@@ -26,6 +26,7 @@ public:
 	VECTOR GetPos() const { return pos; };
 	VECTOR GetColliderPos() const { return collider->GetCenterPos(); };
 	float GetColliderRadius() const { return collider->GetColliderRasius(); };
+	int GetLifeNum()const { return life; };
 private:
 	Collider* collider;                 // 判定クラス
 	int	modelHandle;					// モデルハンドル

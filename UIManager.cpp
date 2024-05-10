@@ -1,8 +1,10 @@
-#include "UImanager.h"
+ï»¿#include "UImanager.h"
 
 UIManager::UIManager()
 {
-
+    // ç”»åƒã®èª­ã¿è¾¼ã¿
+    excellentImgHandle = LoadGraph("IMG/Excellent.png");
+    lifeImgHandle = LoadGraph("IMG/Life.png");
 }
 
 UIManager::~UIManager()
@@ -11,50 +13,58 @@ UIManager::~UIManager()
 }
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹ƒV[ƒ“•`‰æ
+/// ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³æç”»
 /// </summary>
 void UIManager::DrawTittleSece()
 {
     SetFontSize(TittleFontSize);
-    DrawFormatString(TittleTextPos.x, TittleTextPos.y, GetColor(255, 0, 0), "tittle");              // ƒ^ƒCƒgƒ‹
+    DrawFormatString(TittleTextPos.x, TittleTextPos.y, GetColor(255, 0, 0), "tittle");              // ã‚¿ã‚¤ãƒˆãƒ«
 
     SetFontSize(TurtrialFontSize);
-    DrawFormatString(TurtrialTextPos.x, TurtrialTextPos.y, GetColor(255, 255, 0), "Space‚ÅƒWƒƒƒ“ƒv"); // ƒ`ƒ…[ƒgƒŠƒAƒ‹
-    DrawFormatString(TurtrialTextPos.x, TurtrialTextPos.y + TurtrialFontSize, GetColor(255, 255, 0), "SƒL[‚ÅƒXƒ^[ƒg");
+    DrawFormatString(TurtrialTextPos.x, TurtrialTextPos.y, GetColor(255, 255, 0), "Spaceã§ã‚¸ãƒ£ãƒ³ãƒ—"); // ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«
+    DrawFormatString(TurtrialTextPos.x, TurtrialTextPos.y + TurtrialFontSize, GetColor(255, 255, 0), "Sã‚­ãƒ¼ã§ã‚¹ã‚¿ãƒ¼ãƒˆ");
 }
 
 /// <summary>
-/// ƒQ[ƒ€ƒV[ƒ“•`‰æ
+/// ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³æç”»
 /// </summary>
-/// <param name="isAvoidanceSuccess">‰ñ”ğ¬Œ÷ƒtƒ‰ƒO</param>
-void UIManager::DrawGameScene(bool isAvoidanceSuccess)
+/// <param name="isAvoidanceSuccess">å›é¿æˆåŠŸãƒ•ãƒ©ã‚°</param>
+void UIManager::DrawGameScene(bool isAvoidanceSuccess,int score, int playerLifeNum)
 {
-    // ‰ñ”ğ¬Œ÷ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚ê‚Î¬Œ÷ƒAƒNƒVƒ‡ƒ“•`‰æ
+    // å›é¿æˆåŠŸãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ã‚Œã°æˆåŠŸã‚¢ã‚¯ã‚·ãƒ§ãƒ³æç”»
     if (isAvoidanceSuccess)
     {
-        DrawFormatString(600, 400, GetColor(255, 0, 0), "¬Œ÷");
+        DrawExtendGraph(400, 50, 800, 250, excellentImgHandle,true);
     }
+
+    // ã‚¹ã‚³ã‚¢ã®æç”»
+    SetFontSize(SuccoreFontSize);
+    DrawFormatString(900, 0, GetColor(0, 0, 0), "Score %d", score);
+
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ©ã‚¤ãƒ•è¡¨ç¤º
+    DrawExtendGraph(10, 10, 70, 58, lifeImgHandle, true);
+    DrawFormatString(70, 10, GetColor(0, 0, 0), "Ã—%d", playerLifeNum);
 }
 
 /// <summary>
-/// 3•bƒJƒEƒ“ƒg
+/// 3ç§’ã‚«ã‚¦ãƒ³ãƒˆ
 /// </summary>
-/// <param name="fps">ƒJƒEƒ“ƒg‚·‚é‚½‚ß‚ÌƒtƒŒ[ƒ€‚ğ“n‚·</param>
+/// <param name="fps">ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ãŸã‚ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¸¡ã™</param>
 bool UIManager::Draw3CountDown(int fps)
 {
-    // 1•b‚²‚Æ‚ÉƒJƒEƒ“ƒgƒ_ƒEƒ“
+    // 1ç§’ã”ã¨ã«ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
     if(fps % 60 == 0)
     {
         nowCount--;
     }
     
-    // ƒtƒHƒ“ƒgƒTƒCƒYİ’è
+    // ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºè¨­å®š
     SetFontSize(CountDownFontSize);
 
-    // ƒJƒEƒ“ƒg•`‰æ
+    // ã‚«ã‚¦ãƒ³ãƒˆæç”»
     DrawFormatString(600, 400, GetColor(255, 0, 0), "%d", nowCount);
 
-    // ƒJƒEƒ“ƒgI—¹true‚ğ•Ô‚·
+    // ã‚«ã‚¦ãƒ³ãƒˆçµ‚äº†æ™‚trueã‚’è¿”ã™
     if (nowCount == 0)
     {
         return true;

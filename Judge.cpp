@@ -2,7 +2,8 @@
 
 Judge::Judge()
 {
-
+	isAvoidanceSuccess = false;
+	avoidanceSuccessFrame = 0;
 }
 
 Judge::~Judge()
@@ -19,7 +20,7 @@ Judge::~Judge()
 void Judge::Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCntroller,int fps)
 {
 	// 回避成功時から0.5秒経過でフラグを下す
-	if (fps = avoidanceSuccessFrame + 30)
+	if (fps == avoidanceSuccessFrame + 30 && isAvoidanceSuccess)
 	{
 		isAvoidanceSuccess = false;
 	}
@@ -47,8 +48,9 @@ void Judge::Update(Player* ply, ObstacleManager* obstacleManager, Score* scoreCn
 	for (int i = 0; i < obstacleObjects.size(); i++)
 	{
 		// 障害物がプレイヤーを超えた際に得点の加算処理
-		if (obstacleObjects[i]->GetPos().x < ply->GetPos().x - ply->GetColliderRadius())
+		if (obstacleObjects[i]->GetPos().x < ply->GetPos().x - ply->GetColliderRadius() && !obstacleObjects[i]->GetIsPassing())
 		{
+			obstacleObjects[i]->SetIsPassing(true); // 通過フラグを立てる
 			scoreCntroller->AddSocre();  // 点数の加算処理
 			isAvoidanceSuccess = true;   // 回避成功フラグを立てる
 			avoidanceSuccessFrame = fps; // 成功字のフレーム数設定
