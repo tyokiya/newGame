@@ -9,6 +9,7 @@
 #include "UImanager.h"
 #include "Score.h"
 #include "EffectController.h"
+#include "Fade.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -46,6 +47,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	UIManager*         uiManager		 = new UIManager();		    // UI管理
 	Score*             scoreController	 = new Score();	            // 点数管理
 	EffectController*  effectController	 = new EffectController();  // エフェクトコントローラー
+	Fade*			   fadeController	 = new Fade();              // フェードコントローラー
 
 	//////////////////////////////////////
 	/// 初期化処理
@@ -102,12 +104,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// S入力でゲームシーンへ
 			if (CheckHitKey(KEY_INPUT_S))
 			{
-				sceneController->ChangeNextScene(); // シーン切り替え
-				frameConter->Initialize();			// フレーム初期化
+				sceneController->ChangeNextScene();			 // シーン切り替え
+				frameConter->Initialize();					 // フレーム初期化
+				fadeController->SetIsFadeStart(true); // フェード開始フラグを立てる
 			}
 
 			break;
-		case Game: // ゲームシーン			
+		case Game: // ゲームシーン						
 			/////////////////////////////////////
 			// 更新処理呼び出し
 			////////////////////////////////////
@@ -155,6 +158,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			if (!gameStartFlg)
 			{
 				gameStartFlg = uiManager->Draw3CountDown(frameConter->GetFrame()); // カウント終了後trueが帰る
+			}
+			// フラグが立ってる間はフェード処理
+			if (fadeController->GetIsFadeStart())
+			{
+				fadeController->Update();
 			}
 
 			// プレイヤーの残機0でリザルトへ

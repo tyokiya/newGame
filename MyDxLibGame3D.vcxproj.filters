@@ -38,6 +38,9 @@
     <Filter Include="ソース ファイル\Effect">
       <UniqueIdentifier>{8ab2dc21-4631-4b24-b26d-4f127b42cb97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Fade">
+      <UniqueIdentifier>{48553b06-3d81-4160-8f19-3ea1155bef76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +85,9 @@
     <ClCompile Include="EffectController.cpp">
       <Filter>ソース ファイル\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ソース ファイル\Fade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -122,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="EffectController.h">
       <Filter>ソース ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ソース ファイル\Fade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
