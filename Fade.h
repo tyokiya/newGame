@@ -1,7 +1,8 @@
 #pragma once
 #include "DxLib.h"
 
-const int FadeSpeed = 5;
+const int FadeSpeed = 1;
+const int intMaxPalNum = 255; // ブレンドモードのマックスパラメータ
 
 /// <summary>
 /// フェードクラス
@@ -11,12 +12,12 @@ class Fade
 public:
     Fade();
     ~Fade();
-    void Update();
-    void SetIsFadeStart(bool setFlg) { isFadeStart = setFlg; };
-    bool GetIsFadeStart()const { return isFadeStart; };
+    void FadeOut();
+    void SetIsFadeOutStart(bool setFlg);
+    bool GetIsFadeOutStart()const { return isFadeOutStart; };
 private:
     int fadeIMGHanlde;
     int fadeCnt;
-    bool isFadeStart;  // フェードインスタートフラグ
+    bool isFadeOutStart;  // フェードインスタートフラグ
 };
 

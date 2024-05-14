@@ -18,6 +18,7 @@ public:
 	void Update(float cameraPosX);
 	void Draw();
 	void DeleteObstacleObject(int index);		 // 指定した障害物オブジェクトの削除
+	void DeleteAllObstacleObject();			     // すべての障害物オブジェクトの削除
 	vector<Obstacle*> GetObstacleObject()const { return obstacleObjects; };
 private:
 	vector<Obstacle*> obstacleObjects; // 障害物オブジェクトのコンテナ	

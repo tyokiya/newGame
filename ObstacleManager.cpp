@@ -7,7 +7,8 @@ ObstacleManager::ObstacleManager()
 
 ObstacleManager::~ObstacleManager()
 {
-
+    // 障害物オブジェクトクラスのコンテナ開放
+    DeleteAllObstacleObject();
 }
 
 /// <summary>
@@ -57,4 +58,15 @@ void ObstacleManager::DeleteObstacleObject(int index)
 {
     delete(obstacleObjects[index]);
     obstacleObjects.erase(obstacleObjects.begin());
+}
+
+/// <summary>
+/// すべての障害物オブジェクトの削除
+/// </summary>
+void ObstacleManager::DeleteAllObstacleObject()
+{
+    for (int i = 0; i < obstacleObjects.size(); i++)
+    {
+        DeleteObstacleObject(i);
+    }
 }

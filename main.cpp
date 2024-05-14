@@ -104,9 +104,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// S入力でゲームシーンへ
 			if (CheckHitKey(KEY_INPUT_S))
 			{
-				sceneController->ChangeNextScene();			 // シーン切り替え
-				frameConter->Initialize();					 // フレーム初期化
-				fadeController->SetIsFadeStart(true); // フェード開始フラグを立てる
+				backGroundManager->DeleteAllObackGroundObject();	//障害物オブジェクトの削除
+				sceneController->ChangeNextScene();				// シーン切り替え
+				frameConter->Initialize();						// フレーム初期化
+				fadeController->SetIsFadeOutStart(true); // フェード開始フラグを立てる
 			}
 
 			break;
@@ -115,35 +116,38 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			// 更新処理呼び出し
 			////////////////////////////////////
 
-			// 4秒に一度背景オブジェクトの追加
-			if (frameConter->GetFrame() % 240 == 0)
+			if (gameStartFlg)
 			{
-				backGroundManager->CreateBackGroudObj(camera->GetPos().x);
-			}
+				// 4秒に一度背景オブジェクトの追加
+				if (frameConter->GetFrame() % 240 == 0)
+				{
+					backGroundManager->CreateBackGroudObj(camera->GetPos().x);
+				}
 
-			// スタートフラグがたち4秒に一回障害物追加
-			if (frameConter->GetFrame() % 240 == 0 && gameStartFlg)
-			{
-				obstacleManager->CreateObstacleObject(camera->GetPos().x);
-			}
+				// スタートフラグがたち4秒に一回障害物追加
+				if (frameConter->GetFrame() % 240 == 0 && gameStartFlg)
+				{
+					obstacleManager->CreateObstacleObject(camera->GetPos().x);
+				}
 
-			// カメラ
-			camera->Update(player);
-			// プレイヤー
-			player->Updata();
-			// 背景管理者
-			backGroundManager->Update(camera->GetPos().x);
-			// 障害物管理者
-			obstacleManager->Update(camera->GetPos().x);
-			// 衝突判定
-			judge->Update(player, obstacleManager, scoreController, effectController, frameConter->GetFrame());
-			// エフェクトコントローラー
-			effectController->Update(frameConter->GetFrame());
+				// カメラ
+				camera->Update(player);
+				// プレイヤー
+				player->Updata();
+				// 背景管理者
+				backGroundManager->Update(camera->GetPos().x);
+				// 障害物管理者
+				obstacleManager->Update(camera->GetPos().x);
+				// 衝突判定
+				judge->Update(player, obstacleManager, scoreController, effectController, frameConter->GetFrame());
+				// エフェクトコントローラー
+				effectController->Update(frameConter->GetFrame());
+			}			
 
 			/////////////////////////////////////
 			// 描画処理呼び出し
 			////////////////////////////////////
-						
+									
 			// 背景管理者
 			backGroundManager->DrawGameScene();
 			// プレイヤー
@@ -154,15 +158,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			uiManager->DrawGameScene(judge->GetIsAvoidanceSuccess(), scoreController->GetScore(),player->GetLifeNum());
 			// エフェクト
 			effectController->Draw();
-			// ゲーム開始までのカウントダウン
-			if (!gameStartFlg)
+
+			// フェードアウト完了あとゲーム開始までのカウントダウン
+			if (!gameStartFlg && !fadeController->GetIsFadeOutStart())
 			{
-				gameStartFlg = uiManager->Draw3CountDown(frameConter->GetFrame()); // カウント終了後trueが帰る
+				gameStartFlg = uiManager->Draw3CountDown(frameConter->GetFrame()); // カウント終了後スタートフラグにtrueが帰る
 			}
 			// フラグが立ってる間はフェード処理
-			if (fadeController->GetIsFadeStart())
+			if (fadeController->GetIsFadeOutStart())
 			{
-				fadeController->Update();
+				fadeController->FadeOut();
 			}
 
 			// プレイヤーの残機0でリザルトへ

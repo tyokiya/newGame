@@ -21,6 +21,7 @@ public:
 	void Update(float cameraPosX);             // 更新処理
 	void DrawGameScene();                      // 描画処理
 	void DrawResultScene();					   // リザルトシーン描画
+	void DeleteAllObackGroundObject();			   // すべての障害物オブジェクトの削除
 private:
 	vector<BackGroundObj*> backGoundObjects; // 背景オブジェクトのコンテナ
 	int GroudImgHandle;                      // 地面画像のハンドル

@@ -9,6 +9,8 @@ BackGroundManager::BackGroundManager()
 
 BackGroundManager::~BackGroundManager()
 {
+    // 背景オブジェクトクラスのコンテナ開放
+    DeleteAllObackGroundObject();
 }
 
 /// <summary>
@@ -76,4 +78,16 @@ void BackGroundManager::DrawResultScene()
     // 背景描画    
     DrawExtendGraph(0, 0, 1200, 800, GroudImgHandle, true); // 地面
     DrawExtendGraph(0, 0, 1200, 450, SkyImgHandle, true);   // 空
+}
+
+/// <summary>
+/// すべての障害物オブジェクトの削除
+/// </summary>
+void BackGroundManager::DeleteAllObackGroundObject()
+{
+    for (int i = 0; i < backGoundObjects.size(); i++)
+    {
+        delete(backGoundObjects[i]);
+        backGoundObjects.erase(backGoundObjects.begin());
+    }
 }
